@@ -15,7 +15,7 @@
 
 void readFiles() {
   TH1D *histMu = new TH1D("histMu", "histMu", 80, 0, 20);
-  for (int eventNumber = 1; eventNumber <= 1001; eventNumber++) {
+  for (int eventNumber = 1; eventNumber <= 2000; eventNumber++) {
     TString filename = Form("rootMK/event%d.root", eventNumber);
     TFile *file = new TFile(filename);
     TTree *tree = (TTree *)file->Get("event");
