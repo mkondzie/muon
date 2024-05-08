@@ -4,7 +4,7 @@
 // #include <iostream>
 
 void convertFiles() {
-  for (int eventNumber = 3449; eventNumber <= 4449; eventNumber++) {
+  for (int eventNumber = 0; eventNumber <= 24498; eventNumber++) {
     TString filename = TString::Format("MK/event (%d).txt", eventNumber);
     Ssiz_t openParenthesisPos = filename.First('(');
     Ssiz_t closeParenthesisPos = filename.First(')');
