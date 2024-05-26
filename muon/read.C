@@ -42,46 +42,46 @@ void read(int eventNumber = 101) {
 
   file.close();
 
-  TSpectrum *spectrum = new TSpectrum();
-  spectrum->Search(channelAhist, 1, "nodraw", 0.6);
+  TSpectrum spectrum = TSpectrum();
+  spectrum.Search(channelAhist, 1, "nodraw", 0.6);
   TList *functionsA = channelAhist->GetListOfFunctions();
   TPolyMarker *polyMarkerA =
       (TPolyMarker *)functionsA->FindObject("TPolyMarker");
-  std::cout << "Channel A: " << spectrum->GetNPeaks() << " found at "
+  std::cout << "Channel A: " << spectrum.GetNPeaks() << " found at "
             << std::endl;
   std::vector<Double_t> peakPositionXChannelA;
-  for (int i = 0; i < spectrum->GetNPeaks(); i++) {
-    peakPositionXChannelA.push_back(spectrum->GetPositionX()[i]);
+  for (int i = 0; i < spectrum.GetNPeaks(); i++) {
+    peakPositionXChannelA.push_back(spectrum.GetPositionX()[i]);
   }
   std::sort(peakPositionXChannelA.begin(), peakPositionXChannelA.end());
   for (auto &peakPositon : peakPositionXChannelA) {
     std::cout << peakPositon << std::endl;
   }
 
-  spectrum->Search(channelBhist, 1, "nodraw", 0.7);
+  spectrum.Search(channelBhist, 1, "nodraw", 0.7);
   TList *functionsB = channelBhist->GetListOfFunctions();
   TPolyMarker *polyMarkerB =
       (TPolyMarker *)functionsB->FindObject("TPolyMarker");
-  std::cout << "Channel B: " << spectrum->GetNPeaks() << " found at "
+  std::cout << "Channel B: " << spectrum.GetNPeaks() << " found at "
             << std::endl;
-   std::vector<Double_t> peakPositionXChannelB;
-  for (int i = 0; i < spectrum->GetNPeaks(); i++) {
-    peakPositionXChannelB.push_back(spectrum->GetPositionX()[i]);
+  std::vector<Double_t> peakPositionXChannelB;
+  for (int i = 0; i < spectrum.GetNPeaks(); i++) {
+    peakPositionXChannelB.push_back(spectrum.GetPositionX()[i]);
   }
   std::sort(peakPositionXChannelB.begin(), peakPositionXChannelB.end());
   for (auto &peakPositon : peakPositionXChannelB) {
     std::cout << peakPositon << std::endl;
   }
 
-  spectrum->Search(channelChist, 1, "nodraw", 0.7);
+  spectrum.Search(channelChist, 1, "nodraw", 0.7);
   TList *functionsC = channelChist->GetListOfFunctions();
   TPolyMarker *polyMarkerC =
       (TPolyMarker *)functionsC->FindObject("TPolyMarker");
-  std::cout << "Channel C: " << spectrum->GetNPeaks() << " found at "
+  std::cout << "Channel C: " << spectrum.GetNPeaks() << " found at "
             << std::endl;
-    std::vector<Double_t> peakPositionXChannelC;
-  for (int i = 0; i < spectrum->GetNPeaks(); i++) {
-    peakPositionXChannelC.push_back(spectrum->GetPositionX()[i]);
+  std::vector<Double_t> peakPositionXChannelC;
+  for (int i = 0; i < spectrum.GetNPeaks(); i++) {
+    peakPositionXChannelC.push_back(spectrum.GetPositionX()[i]);
   }
   std::sort(peakPositionXChannelC.begin(), peakPositionXChannelC.end());
   for (auto &peakPositon : peakPositionXChannelC) {
@@ -107,4 +107,8 @@ void read(int eventNumber = 101) {
   channelChist->Draw("Hist");
   if (polyMarkerC)
     polyMarkerC->Draw();
+
+  canvas->Print(Form("event%d.pdf", eventNumber));
+  delete channelAhist, channelBhist, channelChist;
+  delete canvas;
 }

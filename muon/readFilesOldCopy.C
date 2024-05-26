@@ -17,8 +17,8 @@ void readFiles() {
   TH1D *histMu = new TH1D("histMu", "histMu", 100, 0, 10);
   for (int eventNumber = 1; eventNumber <= 1001; eventNumber++) {
     TString filename = Form("rootMK/event%d.root", eventNumber);
-    TFile *file = new TFile(filename);
-    TTree *tree = (TTree *)file->Get("event");
+    TFile file = TFile(filename);
+    TTree *tree = (TTree *)file.Get("event");
 
     Double_t time, channelA, channelB, channelC;
 
@@ -42,7 +42,8 @@ void readFiles() {
       histChannelC->Fill(time, channelC);
     }
 
-    TSpectrum *spectrum = new TSpectrum();
+    TSpectrum spectrum_ = TSpectrum();
+    auto spectrum = &spectrum_;
     spectrum->Search(histChannelA, 1, "nodraw", 0.6);
 
     std::vector<Double_t> peakPositionXChannelA;
