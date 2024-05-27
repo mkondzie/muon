@@ -81,7 +81,7 @@ void readSaveFiles() {
     std::clog << chosenEvent << std::endl;
   }
   //_________________________________________//
-  TH1D *histMu = new TH1D("histMu", "histMu", 100, 0, 20); // 53 bins, max is 20 //69
+  TH1D *histMu = new TH1D("histMu", "histMu", 67, 0, 20); // 53 bins, max is 20 //69
   for (int eventNumber = lowerBound; eventNumber <= upperBound; eventNumber++) {
     TString filename = Form("rootMK/event%d.root", eventNumber);
     TFile file = TFile(filename);
